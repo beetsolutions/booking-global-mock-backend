@@ -1,5 +1,5 @@
 {
-  "name": "booking-clone-backend",
+  "name": "booking-global-mock-backend",
   "version": "1.0.0",
   "description": "Backend API for booking.com clone",
   "main": "dist/server.js",
