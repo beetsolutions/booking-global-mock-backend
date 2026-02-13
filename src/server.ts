@@ -19,26 +19,26 @@ dotenv.config();
 const app: Express = express();
 
 // Database connection middleware - ensures DB is connected before handling requests
-const ensureDBConnection = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    // connectDB() handles its own caching and will return the same promise for concurrent calls
-    await connectDB();
-    next();
-  } catch (error) {
-    console.error('Database connection error:', error);
-    res.status(503).json({ 
-      message: 'Database connection unavailable', 
-      error: process.env.NODE_ENV === 'production' ? undefined : String(error)
-    });
-  }
-};
-
-// In non-serverless environments, connect to DB immediately at startup
-if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
-  connectDB().catch(error => {
-    console.error('Failed to connect to database at startup:', error);
-  });
-}
+// const ensureDBConnection = async (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//     // connectDB() handles its own caching and will return the same promise for concurrent calls
+//     await connectDB();
+//     next();
+//   } catch (error) {
+//     console.error('Database connection error:', error);
+//     res.status(503).json({
+//       message: 'Database connection unavailable',
+//       error: process.env.NODE_ENV === 'production' ? undefined : String(error)
+//     });
+//   }
+// };
+//
+// // In non-serverless environments, connect to DB immediately at startup
+// if (!process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME) {
+//   connectDB().catch(error => {
+//     console.error('Failed to connect to database at startup:', error);
+//   });
+// }
 
 // Middleware
 app.use(helmet());
@@ -55,7 +55,7 @@ app.get('/health', (req, res) => {
 });
 
 // Apply database connection middleware to all API routes
-app.use('/api', ensureDBConnection);
+// app.use('/api', ensureDBConnection);
 
 // Routes
 app.use('/api/auth', authRoutes);
