@@ -181,6 +181,51 @@ backend/
 
 ## Deployment
 
+### Deploy to Railway
+
+This backend is optimized for deployment to Railway, which provides persistent hosting with no timeout limitations.
+
+#### Quick Deploy Steps:
+
+1. **Push to GitHub**: Ensure your code is pushed to a GitHub repository
+
+2. **Create a Railway Account**:
+   - Go to [railway.app](https://railway.app)
+   - Sign up or log in with GitHub
+
+3. **Create a New Project**:
+   - Click "New Project"
+   - Select "Deploy from GitHub repo"
+   - Choose your repository
+
+4. **Configure Environment Variables** in Railway:
+   ```
+   NODE_ENV=production
+   MONGODB_URI=your-mongodb-connection-string
+   JWT_SECRET=your-secure-jwt-secret-key
+   JWT_EXPIRE=7d
+   SEED_DB=false
+   ```
+   
+   **Note**: Railway automatically provides the `PORT` environment variable. The app is configured to use it.
+
+5. **Deploy**: Railway will automatically detect the Node.js app, run `npm run build`, and start with `npm start`
+
+6. **Get Your API URL**: Copy the deployment URL from Railway dashboard (e.g., `https://your-app.railway.app`)
+
+#### Configuration Files:
+
+- **`nixpacks.toml`**: Optimizes Railway build configuration
+- **`package.json`**: Contains build and start scripts Railway uses
+
+#### MongoDB Setup:
+
+For production, use MongoDB Atlas (free tier available):
+1. Create a cluster at [mongodb.com/cloud/atlas](https://mongodb.com/cloud/atlas)
+2. Get your connection string
+3. Add it as `MONGODB_URI` environment variable in Railway
+4. Whitelist Railway's IP addresses or use `0.0.0.0/0` (less secure but easier)
+
 ### Deploy to Vercel
 
 This backend is pre-configured for deployment to Vercel with serverless functions.
