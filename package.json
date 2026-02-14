@@ -2,11 +2,11 @@
   "name": "booking-global-mock-backend",
   "version": "1.0.0",
   "description": "Backend API for booking.com clone",
-  "main": "dist/server.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "test": "echo \"No tests specified\" && exit 0"
   },
   "keywords": [
